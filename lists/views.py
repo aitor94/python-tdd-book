@@ -1,3 +1,4 @@
+from lists.models import Item, List
 from django.shortcuts import redirect, render
 from lists.models import Item
 
@@ -9,6 +10,7 @@ def view_list(request):
     return render(request, 'list.html', {'items': items})
 
 def new_list(request):
-    Item.objects.create(text=request.POST['item_text'])
+    list_ = List.objects.create()
+    Item.objects.create(text=request.POST['item_text'], list=list_)
     return redirect('/lists/the-only-list-in-the-world/')
 
